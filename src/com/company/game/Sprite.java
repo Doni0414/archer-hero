@@ -20,6 +20,12 @@ public class Sprite extends ImageView {
         setFitHeight(height);
     }
 
+    public void resizeWithKeepRatio(double height) {
+        double w = getImage().getWidth(), h = getImage().getHeight();
+        double ratio = w / h;
+        resizeTo(height * ratio, height);
+    }
+
     public String getName() {
         return name;
     }

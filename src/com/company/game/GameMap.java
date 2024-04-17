@@ -1,6 +1,7 @@
 package com.company.game;
 
 import com.company.game.entity.Player;
+import com.company.game.item.Arrow;
 import com.company.game.item.Target;
 import javafx.geometry.Bounds;
 import javafx.scene.layout.Pane;
@@ -33,7 +34,7 @@ public class GameMap extends Pane {
 
         player = new Player(
                 "Hero", Configuration.PLAYER_PATH, 100, 100,
-                Configuration.PLAYER_IDLE_PATH,
+                Configuration.PLAYER_PATH,
                 Configuration.PLAYER_PREATTACK_PATH,
                 Configuration.PLAYER_ATTACK_PATH,
                 playerWidth, playerHeight
@@ -54,5 +55,22 @@ public class GameMap extends Pane {
         target.resizeTo(targetSize, targetSize);
         target.setLayoutX(bounds.getWidth() - 20 - targetSize);
         target.setLayoutY(bounds.getHeight() - blockMap.getBlockSize() - targetSize + 10);
+        getChildren().add(target.getEllipse());
+    }
+
+    public Target getTarget() {
+        return target;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public BlockMap getBlockMap() {
+        return blockMap;
+    }
+
+    public boolean checkCollision(Arrow arrow) {
+        return blockMap.checkCollision(arrow) || target.collide(arrow);
     }
 }

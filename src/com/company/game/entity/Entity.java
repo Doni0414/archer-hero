@@ -14,6 +14,7 @@ public class Entity extends Sprite {
     protected String idlePath;
     protected String preAttackPath;
     protected String attackPath;
+    private Image idleImage, preAttackImage, attackImage;
     protected List<Image> idleImages;
     protected List<Image> preAttackImages;
     protected List<Image> attackImages;
@@ -31,15 +32,20 @@ public class Entity extends Sprite {
         this.desiredWidth = desiredWidth;
         this.desiredHeight = desiredHeight;
 
-        resizeToDesired();
+        idle();
     }
 
     public void idle() {
-        if (idleImages == null) {
-            loadIdleImages();
-        }
+//        if (idleImages == null) {
+//            loadIdleImages();
+//        }
 //        animate(idleImages);
-
+        if (idleImage == null) {
+            idleImage = new Image(idlePath);
+        }
+        setImage(idleImage);
+        setScaleX(-1);
+        resizeToDesired();
     }
 
     private void loadIdleImages() {
@@ -51,7 +57,12 @@ public class Entity extends Sprite {
     }
 
     public void preAttack() {
-
+        if (preAttackImage == null) {
+            preAttackImage = new Image(preAttackPath);
+        }
+        setImage(preAttackImage);
+        setScaleX(-1);
+        resizeToDesired();
     }
 
     public void attack() {
@@ -93,6 +104,6 @@ public class Entity extends Sprite {
     }
 
     public void resizeToDesired() {
-        resizeTo(desiredWidth, desiredHeight);
+        resizeWithKeepRatio(desiredHeight);
     }
 }

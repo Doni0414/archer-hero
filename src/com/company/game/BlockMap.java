@@ -4,6 +4,7 @@ import com.company.game.block.Air;
 import com.company.game.block.Block;
 import com.company.game.block.ground.Ground;
 import com.company.game.block.ground.GroundType;
+import com.company.game.item.Arrow;
 import javafx.scene.layout.GridPane;
 
 public class BlockMap extends GridPane {
@@ -72,5 +73,16 @@ public class BlockMap extends GridPane {
 
     public void setBlocks(Block[][] blocks) {
         this.blocks = blocks;
+    }
+
+    public boolean checkCollision(Arrow arrow) {
+        for (Block[] bs: blocks) {
+            for (Block block: bs) {
+                if (!(block instanceof Air) && arrow.getBoundsInParent().intersects(block.getBoundsInParent())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

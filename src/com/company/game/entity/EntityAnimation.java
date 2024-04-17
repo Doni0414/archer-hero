@@ -1,4 +1,4 @@
-package com.company.game;
+package com.company.game.entity;
 
 import com.company.game.entity.Entity;
 import javafx.animation.Interpolator;
